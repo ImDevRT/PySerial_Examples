@@ -28,15 +28,16 @@ except serial.SerialException:
           "\nCheck the PORT number")
 
 # Transmit data to the receiving UART
-data = bytes("help\n", "utf-8")
-ser_con.write(data)
+data_to_send = bytes("help\n", "utf-8")
+ser_con.write(data_to_send)
 
 # Read output data
 output_data = ""
 while True:
-    output_data += ser_con.read(1).decode("utf-8")
-    if (output_data == ""):
+    read_data = ser_con.read(1).decode("utf-8")
+    if (read_data == ""):
         break
+    output_data += read_data
     time.sleep(0.1)
 
 print(output_data)
